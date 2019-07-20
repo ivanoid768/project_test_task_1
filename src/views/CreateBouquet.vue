@@ -12,12 +12,12 @@
 
       <div class="form-group">
         <label for="avaliable">Наличие</label>
-        <Select></Select>
+        <Select :options="availableOpts" v-model="available"></Select>
       </div>
 
       <div class="form-group">
         <label for="name">Название</label>
-        <input type="text" id="name" placeholder="Маленький розовый">
+        <input v-model="name" type="text" id="name" placeholder="Маленький розовый">
       </div>
 
       <div class="form-group">
@@ -27,7 +27,7 @@
 
       <div class="form-group">
         <label for="price">Цена, Т</label>
-        <input type="number" id="price" placeholder="10200">
+        <input v-model="price" type="number" id="price" placeholder="10200">
       </div>
 
       <div class="form-group">
@@ -37,9 +37,9 @@
       </div>
 
       <div class="form-group">
-        <label for="color">Состав</label>
+        <label for="color">Цвет</label>
         <!-- <input type="number" id="color"> -->
-        <Select></Select>
+        <Select :options="colorOpts" v-model="color"></Select>
       </div>
 
       <button type="submit" class="btn btn-primary">Опубликовать</button>
@@ -48,7 +48,6 @@
 </template>
 
 <script>
-  // @ is an alias to /src
   import Select from '@/components/Select.vue';
   import MultiSelect from '@/components/MultiSelect.vue';
   import ImageInput from '@/components/ImageInput.vue';
@@ -62,6 +61,37 @@
       ImageInput,
       TextArea
     },
+    data() {
+      return {
+        organizationId: 8,
+        name: "",
+        price: null,
+        description: "",
+        height: 10,
+        mainImage: null,
+        subtitle: "",
+        url: "",  //"/my_beauriful_bouquet"
+        cityCodes: "", // ["astana"]
+        categoriesIds: "", // [1, 2]
+        available: '0',
+        color: '0',
+        availableOpts: [],
+        compositionOpts: [],
+        colorOpts: []
+      }
+    },
+    created() {
+      this.availableOpts = [
+        { name: 'Есть в наличии' },
+        { name: 'Нет в наличии' }
+      ];
+
+      this.colorOpts = [
+        { name: 'Красный' },
+        { name: 'Розовый' }
+      ];
+
+    }
   };
 </script>
 

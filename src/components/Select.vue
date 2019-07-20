@@ -1,10 +1,25 @@
 <template>
-  <select name="sel_1" id="sel_1">
-    <option value="1">Есть в наличии</option>
-    <option value="2">option_2</option>
-    <option value="3">option_3</option>
+  <select @change="onChange" name="sel_1" id="sel_1" :value="value">
+    <option v-for="(option, index) in options" :key="index" :value="index">
+      <span> {{option.name}} </span>
+    </option>
   </select>
 </template>
+
+<script>
+  export default {
+    props: {
+      options: Array,
+      value: String,
+    },
+    methods: {
+      onChange(e) {
+        this.$emit('input', e.target.value)
+      }
+    }
+  }
+</script>
+
 
 <style lang="scss" scoped>
   select {
